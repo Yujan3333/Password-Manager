@@ -1,131 +1,240 @@
-
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  
-  body {
-    background-color: #f5f5f5;
-  }
-  
-  
-  /* Login and signup page */
-  .login-section ,   .signup-section {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  /* .signup-section{
+body {
+  background-color: #f5f5f5;
+}
+
+/* Add form for user input */
+
+.add-form {
+  display: none;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+  width: 400px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: #042b01;
+}
+
+.add-form input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  border: 1px solid rgb(25, 121, 2);
+  border-radius: 3px;
+}
+
+.add-form input:focus {
+  border: none;
+  outline: 2.5px solid #0b6813;
+}
+
+.add-form button {
+  background-color: #22d422; /* Button background color */
+  color: #fff; /* Button text color */
+  padding: 10px 15px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.add-form button:hover {
+  background-color: #15991b; /* Button background color on hover */
+}
+/* Add form End */
+
+/* HOMEPAGE */
+/* Header section*/
+header {
+  background-color: #010301c9;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+}
+
+header h2 {
+  cursor: pointer;
+}
+
+header a {
+  padding: 0.6rem 2rem;
+  background-color: #eeb806ad;
+  color: #000000;
+  border: none;
+  font-size: 1.1rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* main section*/
+main,
+footer {
+  margin-top: 3rem;
+  padding: 0 6rem;
+}
+
+main .main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #8f979d;
+  padding-bottom: 0.5rem;
+}
+
+main .main-body {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+}
+
+main button {
+  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 50%;
+  background-color: #5dd327;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 0 2px rgba(23, 23, 23, 0.1);
+}
+
+/* Login and signup page */
+.login-section,
+.signup-section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* .signup-section{
     display: flex;
     justify-content: center;
     align-items: center;
   } */
-  
+
+.login-div,
+.signup-div {
+  width: 40%;
+  padding: 3rem;
+  background-color: #ffffff;
+  border-radius: 0.3rem;
+  box-shadow: 0 0 0 1px rgba(8, 122, 14, 0.384);
+}
+
+.login-div h2,
+.signup-div h2 {
+  color: #042b01;
+  text-align: center;
+  letter-spacing: 3px;
+}
+
+.login-div form,
+.signup-div form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-div form > label,
+.signup-div form > label {
+  color: #042b01;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.login-div form input,
+.signup-div form input {
+  padding: 0.7rem;
+  margin-bottom: 2rem;
+  margin-top: 0.4rem;
+  border-radius: 0.3rem;
+  border: 1px solid rgb(25, 121, 2);
+}
+
+.login-div form > input:focus,
+.signup-div form > input:focus {
+  border: none;
+  outline: 2.5px solid #0b6813;
+}
+
+.login-div form button,
+.signup-div form button {
+  margin-top: 2rem;
+  padding: 0.6rem;
+  font-size: 1.1rem;
+  border-radius: 0.3rem;
+  border: 1px solid rgb(128, 128, 128);
+  cursor: pointer;
+  background-color: #173d01;
+  color: #ffffff;
+}
+
+.login-div form button:hover,
+.signup-div form button:hover {
+  background-color: #042b01;
+}
+
+.signup-div form button {
+  margin-top: 1rem;
+}
+
+.login-div .links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-div .links,
+.signup-div .links {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.login-div .links a,
+.signup-div .links a {
+  text-decoration: none;
+  color: green;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 750px) {
+  /* HOMEPAGE */
+  header {
+    padding: 1rem;
+  }
+
+  header a {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  main {
+    padding: 0 1rem;
+  }
+
+  /* LOGIN, REGISTARTION, & FORGOT PASSWORD PAGES */
   .login-div,
   .signup-div {
-    width: 40%;
-    padding: 3rem;
-    background-color: #ffffff;
-    border-radius: 0.3rem;
-    box-shadow: 0 0 0 1px rgba(8, 122, 14, 0.384);
+    width: 90%;
+    padding: 1.5rem;
   }
-
-  
-  .login-div h2,
-  .signup-div h2 {
-    color: #042b01;
-    text-align: center;
-    letter-spacing: 3px;
-  }
-  
-  .login-div form,
-  .signup-div form{
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .login-div form > label,
-  .signup-div form > label {
-    color: #042b01;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    font-weight: bold;
-  }
-  
-  .login-div form input,
-  .signup-div form input{
-    padding: 0.7rem;
-    margin-bottom: 2rem;
-    margin-top: 0.4rem;
-    border-radius: 0.3rem;
-    border: 1px solid rgb(25, 121, 2);
-  }
-  
-  .login-div form > input:focus,
-  .signup-div form > input:focus{
-    border: none;
-    outline: 2.5px solid #0b6813;
-  }
-  
-  
-  .login-div form button,
-  .signup-div form button{
-    margin-top: 2rem;
-    padding: 0.6rem;
-    font-size: 1.1rem;
-    border-radius: 0.3rem;
-    border: 1px solid rgb(128, 128, 128);
-    cursor: pointer;
-    background-color: #173d01;
-    color: #ffffff;
-  }
-  
-  .login-div form button:hover,
-  .signup-div form button:hover {
-    background-color: #042b01;
-  }
-  
-  
-  .signup-div form button {
-    margin-top: 1rem;
-  }
-  
-  .login-div .links {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .login-div .links,
-  .signup-div .links {
-    margin-top: 2rem;
-    text-align: center;
-  }
-  
-  .login-div .links a,
-  .signup-div .links a {
-    text-decoration: none;
-    color: green;
-  }
-
-  
-
-  /* MEDIA QUERIES */
-  @media (max-width: 750px) {
-
-    /* LOGIN, REGISTARTION PAGES*/
-    .login-div,
-    .signup-div
-    {
-      width: 90%;
-      padding: 1.5rem;
-    }
-  }
-  
+}
