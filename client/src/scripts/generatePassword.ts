@@ -1,6 +1,10 @@
 // generatePassword.ts
 
-// Generates a random password
+/**
+ * 
+ * @param length number for the password length
+ * @returns string password
+ */
 const generatePassword = (length: number): string => {
     // Defining character sets for uppercase letters, lowercase letters, numbers, and special characters.
     const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -38,12 +42,15 @@ const generatePassword = (length: number): string => {
       // Setting the password
       if (passwordInput) {
         passwordInput.value = generatedPassword;
+
+        //For Checking the strength of the generated password
+        updatePasswordStrengthIndicator();
       }
     });
   }
   
   // Password view icon section
-  // Add an event listener to the "Toggle Password" icon to switch between visible password and hidden password.
+  // Adding event listener to the "Toggle Password" icon to switch between visible password and hidden password.
   const togglePasswordIcon = document.getElementById("togglePassword");
   const passwordInput = document.getElementById("password") as HTMLInputElement;
   

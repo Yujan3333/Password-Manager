@@ -45,11 +45,15 @@
           
           <label for="password">Password:</label>
           <!-- <input type="password" id="password" name="password" required /><br /> -->
+          <!-- To autogenerate the password and also have a eye button -->
           <div class="password-container">
             <input type="password" id="password" name="password" required />
             <i id="togglePassword" class="toggle-password-icon uil uil-eye-slash"></i>
           </div>
+          <!-- For strength checker -->
+          <div id="passwordStrength" class="password-strength"></div>
 
+          <!-- Buttons -->
           <button type="submit" id="submitForm">Add Entry</button>
           <button type="button" id="cancelForm">Cancel</button>
         </form>
@@ -57,8 +61,8 @@
       </div>
     </main>
 
-    <script type="module" src="/src/scripts/dashboard.ts"></script>
-    <script src="src/scripts/generatePassword.ts"></script>
-    <script type="module" src="/src/main.ts"></script>
+    <script  src="/src/scripts/addDataForm.ts"></script>
+    <script  src="src/scripts/generatePassword.ts"></script>
+    <script  src="/src/scripts/strengthChecker.ts"></script>
   </body>
 </html>
