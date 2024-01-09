@@ -26,9 +26,13 @@
     <!-- Main Section -->
     <main>
       <div class="main-header">
-        <h3>Vault</h3>
+        <!-- <h3>Vault</h3> -->
+        <button id="generatePasswordButton" class="generate-password-btn">
+          Generate Password
+        </button>
         <!-- <button class="generate-password">Generate password</button> -->
-        <button id="addButton"><i class="uil uil-plus"></i></button>
+          <button id="addButton"><i class="uil uil-plus"></i></button>
+        
       </div>
 
       <div class="main-body">
@@ -38,15 +42,23 @@
           <input type="text" id="website" name="website" required /><br />
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" required /><br />
+          
           <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required /><br />
+          <!-- <input type="password" id="password" name="password" required /><br /> -->
+          <div class="password-container">
+            <input type="password" id="password" name="password" required />
+            <i id="togglePassword" class="toggle-password-icon uil uil-eye-slash"></i>
+          </div>
+
           <button type="submit" id="submitForm">Add Entry</button>
           <button type="button" id="cancelForm">Cancel</button>
         </form>
+
       </div>
     </main>
 
     <script type="module" src="/src/scripts/dashboard.ts"></script>
+    <script src="src/scripts/generatePassword.ts"></script>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

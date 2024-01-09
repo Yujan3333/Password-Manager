@@ -9,7 +9,6 @@ body {
 }
 
 /* Add form for user input */
-
 .add-form {
   display: none;
   padding: 20px;
@@ -55,7 +54,23 @@ body {
 }
 /* Add form End */
 
-/* HOMEPAGE */
+
+/* Password View Section CSS */
+.password-container {
+  position: relative;
+}
+
+.toggle-password-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+/* Password View Section CSS END*/
+
+
+/* Dashboard Page */
 /* Header section*/
 header {
   background-color: #010301c9;
@@ -82,8 +97,7 @@ header a {
 }
 
 /* main section*/
-main,
-footer {
+main{
   margin-top: 3rem;
   padding: 0 6rem;
 }
@@ -97,13 +111,47 @@ main .main-header {
 }
 
 main .main-body {
-  margin-top: 2rem;
+  /* margin-top: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 1rem;
+  gap: 1rem; */
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
-main button {
+/* main button {
+  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 50%;
+  background-color: #5dd327;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 0 2px rgba(23, 23, 23, 0.1);
+} */
+
+
+/* CSS for generate password button */
+.generate-password-btn {
+  font-size: 1rem;
+  padding: 1rem 1.5rem; /* Increase padding for better appearance */
+  border-radius: 5px; /* Add some border-radius for rounded corners */
+  background-color: #3498db; /* Use a different color */
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 0 2px rgba(23, 23, 23, 0.1);
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.generate-password-btn:hover {
+  background-color: #2980b9; /* Change background color on hover */
+}
+
+/* Css for add or Plus button  */
+#addButton{
   font-size: 1rem;
   padding: 1rem;
   border-radius: 50%;
@@ -113,6 +161,8 @@ main button {
   cursor: pointer;
   box-shadow: 0 0 0 2px rgba(23, 23, 23, 0.1);
 }
+/* Dashboard END */
+
 
 /* Login and signup page */
 .login-section,
