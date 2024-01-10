@@ -33,6 +33,18 @@ addForm.addEventListener("submit", (event) => {
 
 cancelFormButton.addEventListener("click", () => {
   addForm.style.display = "none"; // Hide the form on cancel
+  // Reset the form elements to their default values
+  addForm.reset();
+  
+  //To remove the div when the password input value is empty
+  const strengthIndicator = document.getElementById("passwordStrength") as HTMLDivElement;
+
+    // Check if the password length is zero 
+    if (passwordInput.value.length === 0) {
+      strengthIndicator.style.display= "none";
+      return; // Exit the function if the password length is zero
+    }
+
 });
 
 function isValidEmail(email: string): boolean {

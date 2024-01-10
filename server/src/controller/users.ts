@@ -37,6 +37,7 @@ export const login = async (req: Request, res: Response) => {
     const data = await userService.login(result.email, result.password);
     if (data !== 401 && data !== 404) {
       res.status(200).json(data);
+      // res.status(200);
     } else if (data === 401) {
       res.status(401).json({ error: "Invalid Credentials" });
     } else if (data === 404) {

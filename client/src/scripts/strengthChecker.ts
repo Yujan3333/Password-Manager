@@ -35,8 +35,9 @@ const checkPasswordStrength = (password: string): string => {
   // To make changes in the front end
   const updatePasswordStrengthIndicator = () => {
     const passwordInput = document.getElementById("password") as HTMLInputElement;
-    const strengthIndicator = document.getElementById("passwordStrength");
-  
+    const strengthIndicator = document.getElementById("passwordStrength") as HTMLDivElement;
+
+    //if password is inputted and strengthIndicator shows in the frontend
     if (passwordInput && strengthIndicator) {
       const passwordStrength = checkPasswordStrength(passwordInput.value);
       strengthIndicator.textContent = `Strength: ${passwordStrength}`;

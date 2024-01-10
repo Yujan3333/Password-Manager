@@ -15,6 +15,18 @@ const hashPassword = async (password: string): Promise<string> => {
 export async function signup(result: SignupInfo) {
 
   try {
+    // Check if the email is already in use
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        email: result.email,
+      },
+    });
+
+    if (existingUser) {
+      // Email is already in use, return an error
+      return { error: "Email is already in use" };
+    }
+    
     //calling the hashing function to hash the password before entering the password in db
     const hashedPassword = await hashPassword(result.password);
 

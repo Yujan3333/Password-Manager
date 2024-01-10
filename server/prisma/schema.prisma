@@ -12,23 +12,20 @@ datasource db {
 
 // User Schema
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  password String
+  Vault    Vault[]
 }
 
-// Password Schema
-model Password {
-  id       Int      @id @default(autoincrement())
-  website  String
-  email    String
-  password String
-  userId   Int      // Assuming a relationship with the User model
+// Vault Schema
+model Vault {
+  id           Int    @id @default(autoincrement())
+  website      String
+  email        String
+  sitepassword String
+  userId       Int // Assuming a relationship with the User model
 
   // Define the foreign key relationship with the User model
-  user     User     @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 }
-
-// Add a unique constraint to ensure that the combination of website and email is unique
-// There can't be duplicate passwords for the same website and email
-@@unique([website, email, userId])
