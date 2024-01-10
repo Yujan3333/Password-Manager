@@ -4,7 +4,7 @@ import config from './config'; // Import the config file
 
 
 // Function to generate an access token with a given userId
-export const generateAccessToken = (userId: string): string => {
+export const generateAccessToken = (userId: number): string => {
   // Create an access token using jwt.sign
   // The token payload includes the userId
   // Use a secret key for signing the token (secret key yujan123)
@@ -16,7 +16,7 @@ export const generateAccessToken = (userId: string): string => {
 };
 
 // Function to generate a refresh token with a given userId
-export const generateRefreshToken = (userId: string): string => {
+export const generateRefreshToken = (userId: number): string => {
   // Create a refresh token using jwt.sign
   // Similar to the access token, the payload includes the userId
   // Use a different secret key for the refresh token (secret key is yujan456)
