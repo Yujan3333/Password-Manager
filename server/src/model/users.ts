@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 // Function to hash the user's password
 const hashPassword = async (password: string): Promise<string> => {
-  const saltRounds = 10;
+  const saltRounds = 10; //10 is better for salt
   const hashedPassword = await bcrypt.hash(password, saltRounds);
   return hashedPassword;
 };

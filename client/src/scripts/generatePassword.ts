@@ -1,5 +1,7 @@
 // generatePassword.ts
 
+// import { updatePasswordStrengthIndicator } from './strengthChecker';
+
 /**
  * 
  * @param length number for the password length
@@ -17,13 +19,13 @@ const generatePassword = (length: number): string => {
   
     //Empty string to store the generated password.
     let password = "";
-  
+
     //Randomly selecting characters from the above combo of string into a single one .
     for (let i = 0; i < length; i++) {
       const randomIndex = Math.floor(Math.random() * allChars.length);
       password += allChars.charAt(randomIndex);
     }
-  
+
     //Return the generated password.
     return password;
   };
@@ -38,7 +40,7 @@ const generatePassword = (length: number): string => {
       const generatedPassword = generatePassword(12);
       // getting the password form the input form of addbutton.
       const passwordInput = document.getElementById("password") as HTMLInputElement;
-  
+
       // Setting the password
       if (passwordInput) {
         passwordInput.value = generatedPassword;

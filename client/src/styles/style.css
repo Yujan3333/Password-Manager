@@ -115,15 +115,16 @@ main .main-header {
   padding-bottom: 0.5rem;
 }
 
-main .main-body {
-  /* margin-top: 2rem;
+/* main .main-body .main-data { */
+main .main-data {
+  margin-top: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 1rem; */
-  margin-top: 2rem;
+  gap: 1rem;
+  /* margin-top: 2rem;
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center;
+  align-items: center; */
 }
 
 /* main button {
