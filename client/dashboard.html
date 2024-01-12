@@ -23,16 +23,24 @@
     <!-- Header section -->
     <header>
       <h2>Password Manager</h2>
-      <a href="./login.html">Log Out</a>
+      <!-- <a href="./login.html">Log Out</a> -->
+      <button id="logout">Logout</button>
     </header>
 
     <!-- Main Section -->
     <main>
       <div class="main-header">
         <!-- <h3>Vault</h3> -->
-        <button id="generatePasswordButton" class="generate-password-btn">
-          Generate Password
-        </button>
+        <div class="generated-password-section">
+          <!-- Generated Password Button -->
+          <button id="generatePasswordButton" class="generate-password-btn">
+            Generate Password
+          </button>
+
+          <!-- Showing the Generated Password -->
+          <div id="generatedPasswordDiv"></div>
+
+        </div>
         <!-- <button class="generate-password">Generate password</button> -->
         <button id="addButton"><i class="uil uil-plus"></i></button>
       </div>
@@ -69,8 +77,23 @@
       </div>
     </main>
 
+    <script src="src/scripts/eyeToggle.ts"></script>
     <script src="/src/scripts/strengthChecker.ts"></script>
     <script src="src/scripts/generatePassword.ts"></script>
-    <script src="/src/scripts/addDataForm.ts"></script>
+    <script src="/src/scripts/Form.ts"></script>
+    <script src="src/scripts/logout.ts"></script>
+
+    <!-- Only Logged in user can access this page -->
+    <script>
+      // Check if the user is authenticated (has a valid token)
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        // Redirect to login page if not authenticated
+        window.location.href = "./index.html";
+      }
+
+    </script>
+
   </body>
 </html>

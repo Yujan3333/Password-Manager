@@ -22,7 +22,7 @@ model User {
 model Vault {
   id           Int    @id @default(autoincrement())
   website      String
-  email        String
+  email     String
   sitepassword String
   userId       Int // Assuming a relationship with the User model
 

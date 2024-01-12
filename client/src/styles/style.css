@@ -8,6 +8,8 @@ body {
   background-color: #f5f5f5;
 }
 
+
+
 /* Add form for user input */
 .add-form {
   display: none;
@@ -90,7 +92,19 @@ header h2 {
   cursor: pointer;
 }
 
-header a {
+/* header a {
+  padding: 0.6rem 2rem;
+  background-color: #eeb806ad;
+  color: #000000;
+  border: none;
+  font-size: 1.1rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  text-decoration: none;
+} */
+
+/* Logout Button */
+#logout {
   padding: 0.6rem 2rem;
   background-color: #eeb806ad;
   color: #000000;
@@ -138,6 +152,22 @@ main .main-data {
   box-shadow: 0 0 0 2px rgba(23, 23, 23, 0.1);
 } */
 
+
+/* Generated Password Section  */
+.generated-password-section{
+  display: flex;
+  gap: 1rem;
+}
+
+/* generated password container */
+#generatedPasswordDiv{
+  display: none;
+  font-size: 1rem;
+  padding: 1rem 1.5rem; 
+  border-radius: 5px; 
+  background-color: #42db34; /* Use a different color */
+  color: #ffffff;
+}
 
 /* CSS for generate password button */
 .generate-password-btn {

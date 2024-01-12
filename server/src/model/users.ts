@@ -1,74 +1,55 @@
-// src/model/user.ts
-import { PrismaClient } from "@prisma/client";
-import { LoginInfo, SignupInfo } from "../interface/userInterface";
+// models/UserModel.ts
+import { PrismaClient, User } from "@prisma/client";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
-// Function to hash the user's password
-const hashPassword = async (password: string): Promise<string> => {
-  const saltRounds = 10; //10 is better for salt
-  const hashedPassword = await bcrypt.hash(password, saltRounds);
-  return hashedPassword;
-};
-
-export async function signup(result: SignupInfo) {
-
-  try {
-    // Check if the email is already in use
-    const existingUser = await prisma.user.findUnique({
-      where: {
-        email: result.email,
-      },
-    });
-
+export default class UserModel {
+  static async createUser(email: string, password: string): Promise<User> {
+    // Check if the email already exists
+    const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) {
-      // Email is already in use, return an error
-      return { error: "Email is already in use" };
+      throw new Error("Email already exists");
     }
-    
-    //calling the hashing function to hash the password before entering the password in db
-    const hashedPassword = await hashPassword(result.password);
 
-    const newUser = await prisma.user.create({
-      data: {
-        email: result.email,
-        password: hashedPassword,
-      },
+    // Hash the password before storing it
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user with the hashed password
+    return prisma.user.create({
+      data: { email, password: hashedPassword },
     });
-    return newUser;
-  } catch (error) {
-    console.error(error);
-    return { error: error };
   }
-}
 
-export async function login(result: LoginInfo) {
-  try {
-    const user = await prisma.user.findUnique({
-      where: {
-        email: result.email,
-      },
-    });
+  static async loginUser(email: string, password: string): Promise<string> {
+    // Find the user by email
+    const user = await prisma.user.findUnique({ where: { email } });
 
-    if (!user) {
-      // User doesn't exist
-      return 404;
+    // Throw an error if the user is not found or the password is incorrect
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+      throw new Error("Invalid credentials");
     }
 
-    const isPasswordValid = await bcrypt.compare(
-      result.password,
-      user.password
+    // Generate JWT token
+    const token = jwt.sign(
+      { userId: user.id, email: user.email },
+      "your-secret-key",
+      {
+        expiresIn: "1h", // Token expires in 1 hour
+      }
     );
 
-    if (!isPasswordValid) {
-      // Invalid credentials
-      return 401;
-    }
+    return token;
+  }
 
-    return user;
-  } catch (error) {
-    console.error(error);
-    return { error: error };
+  static async verifyToken(token: string): Promise<object> {
+    // Verify JWT token
+    try {
+      const decoded = jwt.verify(token, "your-secret-key");
+      return decoded as object;
+    } catch (error) {
+      throw new Error("Invalid token");
+    }
   }
 }

@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const response = await fetch("http://127.0.0.1:8000/users/login", {
-        // Add the http:// protocol to the URL
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -21,7 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await response.json();
 
       if (response.ok) {
-        // alert("Login successful");
+        // Save token to local storage
+        localStorage.setItem("token", data.token);
+
         // Redirect to dashboard.html
         window.location.href = "./dashboard.html";
       } else {
@@ -32,4 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("An error occurred during login");
     }
   });
+
+
 });

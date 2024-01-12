@@ -2,7 +2,7 @@ import {Router} from "express";
 
 // import {authenticateToken, refreshActionToken} from "../middleware/authToken";
 import usersRoutes from "./users";
-// import passwordsRoutes from "./passwords";
+import vaultRoutes from "./vault";
 
 
 const router = Router();
@@ -11,7 +11,7 @@ const router = Router();
 router.use("/users",usersRoutes);
 
 // route for User stored Passwords CRUD operations
-// router.use("/passwords", passwordsRoutes);
+router.use("/vaults", vaultRoutes);
 
 
 export default router; 
