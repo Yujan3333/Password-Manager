@@ -32,7 +32,7 @@ const checkPasswordStrength = (password: string): string => {
   }
   };
   
-// To make changes in the front end
+//ADD FORM ***************************************************
 const updatePasswordStrengthIndicator = () => {
   const passwordInput = document.getElementById("password") as HTMLInputElement;
   const strengthIndicator = document.getElementById("passwordStrength") as HTMLDivElement;
@@ -67,7 +67,51 @@ const updatePasswordStrengthIndicator = () => {
   
   
   // Event Listerner for real time password strength checking
-  const passwordInputS = document.getElementById("password") as HTMLInputElement;
-  if (passwordInputS) {
-    passwordInputS.addEventListener("input", updatePasswordStrengthIndicator);
+  const passwordInputStrengthCheck = document.getElementById("password") as HTMLInputElement;
+  if (passwordInputStrengthCheck) {
+    passwordInputStrengthCheck.addEventListener("input", updatePasswordStrengthIndicator);
   }
+
+
+// EDIT FORM *********************************************************************
+const updatePasswordStrengthIndicatorEdit = () => {
+  const editPassword = document.getElementById("editPassword") as HTMLInputElement;
+  const strengthIndicator = document.getElementById("editPasswordStrength") as HTMLDivElement;
+
+  // Check if the password is empty
+  if (editPassword && strengthIndicator) {
+    const password = editPassword.value.trim();
+
+    if (password.length === 0) {
+      // If password is empty, hide the strength indicator
+      strengthIndicator.textContent = ""; // Clear the strength text
+      strengthIndicator.style.display = "none"; // Hide the strength indicator
+    } else {
+      // If password is not empty, calculate and display the strength
+      const passwordStrength = checkPasswordStrength(password);
+      strengthIndicator.textContent = `Strength: ${passwordStrength}`;
+
+      // Set colors according to strength
+      if (passwordStrength === "Weak") {
+        strengthIndicator.style.color = "red";
+      } else if (passwordStrength === "Moderate") {
+        strengthIndicator.style.color = "blue";
+      } else if (passwordStrength === "Strong") {
+        strengthIndicator.style.color = "green";
+      }
+
+      // Show the strength indicator
+      strengthIndicator.style.display = "block";
+    }
+  }
+};
+
+// Event Listener for real-time password strength checking
+const passwordInputEdit = document.getElementById("editPassword") as HTMLInputElement;
+if (passwordInputEdit) {
+  passwordInputEdit.addEventListener("input", updatePasswordStrengthIndicatorEdit);
+}
+
+
+
+  

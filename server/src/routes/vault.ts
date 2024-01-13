@@ -4,7 +4,7 @@ import VaultController from '../controller/vault';
 
 const router = express.Router();
 
-router.get('/:userId', VaultController.getAllVaults);
+router.get('/', VaultController.getAllVaults);
 // router.get('/:vaultId', VaultController.getVaultById);
 router.post('/', VaultController.addVault);
 router.put('/:vaultId', VaultController.updateVault);

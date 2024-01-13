@@ -1,17 +1,15 @@
-import {Router} from "express";
-
-// import {authenticateToken, refreshActionToken} from "../middleware/authToken";
-import usersRoutes from "./users";
-import vaultRoutes from "./vault";
-
+// routes/index.ts
+import { Router } from 'express';
+import usersRoutes from './users';
+import vaultRoutes from './vault';
+// import {auth} from '../middleware/authMiddleware';
 
 const router = Router();
 
-// user route for login and signup
-router.use("/users",usersRoutes);
+// User routes for login and signup
+router.use('/users', usersRoutes);
 
-// route for User stored Passwords CRUD operations
-router.use("/vaults", vaultRoutes);
+// router.use('/vaults', auth, vaultRoutes);
+router.use('/vaults',  vaultRoutes);
 
-
-export default router; 
+export default router;

@@ -1,5 +1,8 @@
 //scripts/addDataForm.ts
 
+// Import the handleDelete function from deleteForm.ts
+// import { handleDelete } from "./delteVault";
+
 const addButton = document.getElementById("addButton") as HTMLElement;
 const addForm = document.getElementById("addForm") as HTMLFormElement;
 // const submitFormButton = document.getElementById("submitForm") as HTMLElement;
@@ -15,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchVaults();
 });
 
+// ADD VAULT FORM *********************************************
 addButton.addEventListener("click", () => {
   //Make the form visible and make it come to center
   addForm.style.display = "block";
@@ -26,7 +30,7 @@ addButton.addEventListener("click", () => {
 });
 
 // addForm.addEventListener("submit", () => {
-  addForm.addEventListener("submit", (event) => {
+addForm.addEventListener("submit", (event) => {
   event.preventDefault(); // On submit page refresh stop
 
   // Validation Logic
@@ -56,55 +60,75 @@ addButton.addEventListener("click", () => {
   // displayFormData(storedData);
 
   //Getting the token in local storage
-  const token = localStorage.getItem("token"); 
-  console.log(token);
+  const token = localStorage.getItem("token");
+  //sending the token thourgh header
+  const headers = new Headers({
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  });
+
+  console.log("Sending POST req", token);
   //SENDING POST request to the backend to store the vault data
   const formData = {
     website: websiteInput.value,
     email: emailInput.value,
     sitepassword: passwordInput.value,
-    token:token,
   };
 
   // Send data to the backend
-  fetch('http://127.0.0.1:8000/vaults', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+  fetch("http://127.0.0.1:8000/vaults", {
+    method: "POST",
+    headers: headers,
+    // {"Content-Type": "application/json"},
     body: JSON.stringify(formData),
   })
-  .then(response => response.json())
-  .then(data => {
-    fetchVaults(); // Refresh the displayed vaults after adding a new one
-  })
-  .catch(error => console.error('Error:', error));
-
+    .then((response) => response.json())
+    .then((data) => {
+      fetchVaults(); // Refresh the displayed vaults after adding a new one
+    })
+    .catch((error) => console.error("Error:", error));
 
   addForm.style.display = "none"; // Hide the form after successful submission
   mainBody.style.display = "block"; //Back to default
   mainData.style.display = "grid"; // Show main body when form is hidden
 });
 
-//Validating the email part
+//Validating the email part *****************************************************
 function isValidEmail(email: string): boolean {
   // Email Validation
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailPattern.test(email);
 }
 
-
 //Showing the fetched data in frontend "class: main-data"
 function fetchVaults() {
-  // Fetch vault data from the backend
-  fetch('http://127.0.0.1:8000/vaults/9')     //Here i am sending userId in the url
-    .then(response => response.json())
-    .then(data => {
+  // // Fetch vault data from the backend
+  // fetch('http://127.0.0.1:8000/vaults')     //Here i am sending userId in the url
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     displayFormData(data);
+  //   })
+  //   .catch(error => console.error('Error:', error));
+
+  //Sending the token to backend as well for userId verify
+  const token = localStorage.getItem("token");
+  const headers = new Headers({
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  });
+
+  fetch("http://127.0.0.1:8000/vaults", {
+    method: "GET",
+    headers: headers,
+  })
+    .then((response) => response.json())
+    .then((data) => {
       displayFormData(data);
     })
-    .catch(error => console.error('Error:', error));
+    .catch((error) => console.error("Error:", error));
 }
 
+//CANCEL THE ADD FORM *************************
 cancelFormButton.addEventListener("click", () => {
   addForm.style.display = "none"; // Hide the form on cancel
   mainBody.style.display = "block"; // Back to default
@@ -112,6 +136,7 @@ cancelFormButton.addEventListener("click", () => {
   // Reset the form elements to their default values
   addForm.reset();
 
+  // PASSWORD STRENGTH CHECK *********************************************
   // To remove the div when the password input value is empty
   const strengthIndicator = document.getElementById(
     "passwordStrength"
@@ -124,8 +149,6 @@ cancelFormButton.addEventListener("click", () => {
     return; // Exit the function if the password length is zero
   }
 });
-
-
 
 // function displayFormData(formDataArray: any[]) {
 //   mainData.innerHTML = ""; // Clear existing content
@@ -142,33 +165,44 @@ cancelFormButton.addEventListener("click", () => {
 //   });
 // }
 
+//DISPLAY DATA ************************************
 // Interface for each form in the frontend
 interface FormDataAll {
+  id: number;
   website: string;
   email: string;
-  password: string;
+  sitepassword: string;
 }
 
-//Displaying the card and its related data in edit 
+//Displaying the card ******************************************
 function displayFormData(formDataArray: FormDataAll[]) {
   const mainData = document.querySelector(".main-data") as HTMLElement;
   mainData.innerHTML = ""; // Clear existing content
 
+  console.log(
+    "Checking jwt token expired or not is not Array yes expired",
+    formDataArray
+  ); //MayNotBeReceived if jwt is expired
+
+  // Reverse the formDataArray to display latest update at first
+  formDataArray.reverse();
+
+  // Generates the HTML element for data fetched from backend **********************
   formDataArray.forEach((formData, index) => {
     const entryDiv = document.createElement("div");
     entryDiv.className = "data-entry card mb-3";
     entryDiv.innerHTML = `
     <div class="card-body ">
-    <h5 class="card-title">Website: ${formData.website}</h5>
+    <p class="card-title"> <strong>Website:</strong> ${formData.website}</p>
     <p class="card-text"><strong>Email:</strong> ${formData.email}</p>
-    Password: 
-    <input type="password" value="${formData.password}" class="card-text" readonly>
+    <strong>Password:</strong> 
+    <input type="password" value="${formData.sitepassword}" class="card-text" readonly>
     <hr />
     <div class="data-buttons">
-      <button class="btn btn-primary edit-button" data-index="${index}" ">
+      <button class="btn btn-primary edit-button" data-index="${index}" data-id="${formData.id}" ">
         Edit
       </button>
-      <button class="btn btn-danger delete-button" data-index="${index}" ">
+      <button class="btn btn-danger delete-button" data-index="${index}" data-id="${formData.id}" ">
         Delete
       </button>
     </div>
@@ -177,69 +211,73 @@ function displayFormData(formDataArray: FormDataAll[]) {
 
     mainData.appendChild(entryDiv);
 
-    // Event listener for edit button
+    // Event listener for edit button in the main body
+    // When edit button clicks loads the data in the editForm
     entryDiv.querySelector(".edit-button")?.addEventListener("click", () => {
-      const editId = Number(
+      const dataIndex = Number(
         entryDiv.querySelector(".edit-button")?.getAttribute("data-index")
       );
-      console.log("Edit button clicked for index:", editId);
 
-      // Create an edit form
-      const editForm = document.createElement("form");
-      // editForm.innerHTML = `
-      //   <label for="editWebsite">Website:</label>
-      //   <input type="text" id="editWebsite" name="editWebsite" value="${formData.website}" required /><br />
-      //   <label for="editEmail">Email:</label>
-      //   <input type="email" id="editEmail" name="editEmail" value="${formData.email}" required /><br />
-      //   <label for="editPassword">Password:</label>
-      //   <input type="password" id="editPassword" name="editPassword" value="${formData.password}" required /><br />
-      //   <button type="button" class="btn btn-primary" id="submitEditForm">Submit</button>
-      // `;
+      // Extract the data of the selected entry
+      const selectedEntry = formDataArray[dataIndex];
 
-      editForm.innerHTML = `
-      <form>
-        <div class="form-group p-2 ">
-          <label for="editWebsite">Website:</label>
-          <input type="text" class="form-control" id="editWebsite" name="editWebsite" value="${formData.website}" required />
-        </div>
-        <div class="form-group p-2">
-          <label for="editEmail">Email:</label>
-          <input type="email" class="form-control" id="editEmail" name="editEmail" value="${formData.email}" required />
-        </div>
-        <div class="form-group p-2">
-          <label for="editPassword">Password:</label>
-          <input type="password" class="form-control" id="editPassword" name="editPassword" value="${formData.password}" required />
-        </div>
-        <button type="button" class="btn btn-primary p-2" id="submitEditForm">Submit</button>
-      </form>
-    `;
+      // Update the edit form with the selected entry data***************************************
+      const editForm = document.getElementById("editForm") as HTMLFormElement;
+      const editWebsiteInput = document.getElementById(
+        "editWebsite"
+      ) as HTMLInputElement;
+      const editEmailInput = document.getElementById(
+        "editEmail"
+      ) as HTMLInputElement;
+      const editPasswordInput = document.getElementById(
+        "editPassword"
+      ) as HTMLInputElement;
+      //TO STORE THE formData.id
+      const editEntryIdInput = document.getElementById(
+        "editEntryId"
+      ) as HTMLInputElement;
 
-      // Replace entryDiv content with the edit form
-      entryDiv.innerHTML = "";
-      entryDiv.appendChild(editForm);
+      editWebsiteInput.value = selectedEntry.website;
+      editEmailInput.value = selectedEntry.email;
+      editPasswordInput.value = selectedEntry.sitepassword;
 
-      // Event listener for submit button in the edit form
-      editForm
-        .querySelector("#submitEditForm")
-        ?.addEventListener("click", () => {
-          // Update the formDataArray with the edited data
-          formDataArray[editId] = {
-            website: (
-              editForm.querySelector("#editWebsite") as HTMLInputElement
-            ).value,
-            email: (editForm.querySelector("#editEmail") as HTMLInputElement)
-              .value,
-            password: (
-              editForm.querySelector("#editPassword") as HTMLInputElement
-            ).value,
-          };
+      const editId = Number(
+        entryDiv.querySelector(".edit-button")?.getAttribute("data-id")
+      );
+      // Set the value of the hidden input with formData.id
+      editEntryIdInput.value = editId.toString(); //changing number to string
 
-          // Save the updated formDataArray to local storage
-          localStorage.setItem("formData", JSON.stringify(formDataArray));
+      // Show the edit form and hide the add form
+      editForm.style.display = "block";
+      addForm.style.display = "none";
+      mainBody.style.display = "flex";
+      mainBody.style.alignItems = "center";
+      mainBody.style.justifyContent = "center";
+      mainData.style.display = "none"; // Hide main body when form is displayed
+    });
 
-          // Display the updated form data
-          displayFormData(formDataArray);
-        });
+    // Event listener for cancel button in the edit form*********************************
+    document.getElementById("cancelEditForm")?.addEventListener("click", () => {
+      const editForm = document.getElementById("editForm") as HTMLFormElement;
+      editForm.style.display = "none"; // Hide the edit form on cancel
+      mainBody.style.display = "block"; // Back to default
+      mainData.style.display = "grid"; // Show main body when form is hidden
+    });
+
+    // WHen DELETE button is clicked Event Listener for it **********************************
+    // Event listener for delete button in the main body
+    entryDiv.querySelector(".delete-button")?.addEventListener("click", () => {
+      const deleteId = Number(
+        entryDiv.querySelector(".delete-button")?.getAttribute("data-id")
+      );
+
+      // Call the handleDelete function from deleteForm.ts
+      handleDelete(deleteId)
+        .then(() => {
+          // After successful deletion, re-fetch and display updated data
+          fetchVaults();
+        })
+        .catch((error) => console.error("Error:", error));
     });
   });
 }

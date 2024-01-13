@@ -2,6 +2,7 @@
 import { PrismaClient, User } from "@prisma/client";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+import config from "../config";
 
 const prisma = new PrismaClient();
 
@@ -32,9 +33,10 @@ export default class UserModel {
     }
 
     // Generate JWT token
+    //here config.myTokenKey is the secret key
     const token = jwt.sign(
       { userId: user.id, email: user.email },
-      "your-secret-key",
+      config.myTokenKey,
       {
         expiresIn: "1h", // Token expires in 1 hour
       }
@@ -43,13 +45,14 @@ export default class UserModel {
     return token;
   }
 
-  static async verifyToken(token: string): Promise<object> {
-    // Verify JWT token
-    try {
-      const decoded = jwt.verify(token, "your-secret-key");
-      return decoded as object;
-    } catch (error) {
-      throw new Error("Invalid token");
-    }
-  }
+  // static async verifyToken(token: string): Promise<object> {
+  //   // Verify JWT token
+  //   //here config.myTokenKey is the secret key
+  //   try {
+  //     const decoded = jwt.verify(token, config.myTokenKey);
+  //     return decoded as object;
+  //   } catch (error) {
+  //     throw new Error("Invalid token");
+  //   }
+  // }
 }

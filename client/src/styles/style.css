@@ -8,10 +8,20 @@ body {
   background-color: #f5f5f5;
 }
 
+/* main-data input password field   */
+.card-body input[type="password"] {
+  width: 100%; /* Occupy 100% of the parent container's width */
+  max-width: 300px; /* Set a maximum width to prevent overflow */
+  box-sizing: border-box; /* Include padding and border in the width calculation */
+  overflow: hidden; /* Hide any content that overflows the box */
+  white-space: nowrap; /* Prevent line breaks within the input */
+}
+
+/* Example of additional responsive styles */
 
 
-/* Add form for user input */
-.add-form {
+/* ADD and EDIT FORM */
+.add-form ,.edit-form {
   display: none;
   padding: 20px;
   border: 1px solid #ccc;
@@ -22,13 +32,13 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.add-form label {
+.add-form label , .edit-form label {
   display: block;
   margin-bottom: 8px;
   color: #042b01;
 }
 
-.add-form input {
+.add-form input, .edit-form input {
   width: 100%;
   padding: 8px;
   margin-bottom: 12px;
@@ -37,12 +47,12 @@ body {
   border-radius: 3px;
 }
 
-.add-form input:focus {
+.add-form input:focus,.edit-form input:focus {
   border: none;
   outline: 2.5px solid #0b6813;
 }
 
-.add-form button {
+.add-form button,.edit-form button {
   background-color: #22d422; /* Button background color */
   color: #fff; /* Button text color */
   padding: 10px 15px;
@@ -51,10 +61,24 @@ body {
   cursor: pointer;
 }
 
-.add-form button:hover {
+.add-form button:hover, .edit-form button:hover {
   background-color: #15991b; /* Button background color on hover */
 }
 /* Add form End */
+
+
+/* EDIT FORM */
+/* .edit-form{
+  display: none;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+  width: 400px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+} */
+
 
 
 /* Password View Section CSS */
@@ -315,6 +339,11 @@ main .main-data {
 
   main {
     padding: 0 1rem;
+  }
+
+  /* main-data input password field responsive */
+  .card-body input[type="password"] {
+    font-size: 14px; 
   }
 
   /* LOGIN, REGISTARTION, & FORGOT PASSWORD PAGES */
