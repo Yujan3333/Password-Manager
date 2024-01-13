@@ -93,6 +93,52 @@ body {
   transform: translateY(-50%);
   cursor: pointer;
 }
+
+/* .toggle-password-icon-main{
+  position: absolute;
+  top: 55%;
+  right: 60px;
+  right: 24px;
+  transform: translateY(-50%);
+  cursor: pointer;
+} */
+
+/* Password section in main-data class */
+.password-container {
+  position: relative;
+  width: 100%; /* Set a fixed width, adjust as needed */
+}
+
+.card-body input[type="password"]{
+  /* width: 100%;  */
+  box-sizing: border-box; 
+  padding-right: 24px; 
+  border: none;
+  background-color: transparent;
+  color: #333; 
+  font-size: 16px; 
+}
+
+.card-body input[type="text"]{
+  /* width: 100%;  */
+  box-sizing: border-box; 
+  padding-right: 24px; 
+  border: none;
+  background-color: transparent;
+  color: #333; 
+  font-size: 16px; 
+}
+
+.toggle-password-icon-main {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #333; /* Adjust icon color */
+}
+
+
 /* Password View Section CSS END*/
 
 /* Password Strength Checker */
@@ -351,5 +397,11 @@ main .main-data {
   .signup-div {
     width: 90%;
     padding: 1.5rem;
+  }
+
+  /* ICON */
+  .toggle-password-icon-main{
+    top: 58%;
+    right: 24px;
   }
 }

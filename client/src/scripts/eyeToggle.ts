@@ -21,12 +21,14 @@
 
   // Password view icon section
 // Adding event listener to the "Toggle Password" icon to switch between visible password and hidden password.
-const togglePasswordIcon = document.getElementById("togglePassword");
-const toggleEditPasswordIcon = document.getElementById("toggleEditPassword");
+const togglePasswordIcon = document.getElementById("togglePassword") as HTMLElement;
+const toggleEditPasswordIcon = document.getElementById("toggleEditPassword") as HTMLElement;
+
 
 const passwordInput = document.getElementById("password") as HTMLInputElement;
 const editPasswordInput = document.getElementById("editPassword") as HTMLInputElement;
 
+// For add form password section
 if (togglePasswordIcon && passwordInput) {
   togglePasswordIcon.addEventListener("click", () => {
     // Toggle 
@@ -42,8 +44,10 @@ if (togglePasswordIcon && passwordInput) {
   });
 }
 
+// For Edit Form Password Icon
 if (toggleEditPasswordIcon && editPasswordInput) {
   toggleEditPasswordIcon.addEventListener("click", () => {
+
     // Toggle 
     if (editPasswordInput.type === "password") {
       editPasswordInput.type = "text";
@@ -56,3 +60,4 @@ if (toggleEditPasswordIcon && editPasswordInput) {
     }
   });
 }
+

@@ -165,6 +165,23 @@ cancelFormButton.addEventListener("click", () => {
 //   });
 // }
 
+ //Toggle the Eye Section for maindata class
+ function togglePasswordVisibility(index:number) {
+  const passwordInput = document.getElementById(`passwordMainData${index}`) as HTMLInputElement;
+  const toggleIcon = document.getElementById(`togglePasswordIconMainData${index}`) as HTMLElement;
+
+  if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      toggleIcon.classList.remove("uil-eye-slash");
+      toggleIcon.classList.add("uil-eye");
+  } else {
+      passwordInput.type = "password";
+      toggleIcon.classList.remove("uil-eye");
+      toggleIcon.classList.add("uil-eye-slash");
+  }
+}
+
+
 //DISPLAY DATA ************************************
 // Interface for each form in the frontend
 interface FormDataAll {
@@ -195,9 +212,12 @@ function displayFormData(formDataArray: FormDataAll[]) {
     <div class="card-body ">
     <p class="card-title"> <strong>Website:</strong> ${formData.website}</p>
     <p class="card-text"><strong>Email:</strong> ${formData.email}</p>
-    <strong>Password:</strong> 
-    <input type="password" value="${formData.sitepassword}" class="card-text" readonly>
-    <hr />
+    <strong>Password:</strong> </br>
+    <div class="password-container">
+            <input type="password" id="passwordMainData${index}" value="${formData.sitepassword}" class="card-text" readonly>
+            <i id="togglePasswordIconMainData${index}" class="toggle-password-icon-main uil uil-eye-slash" onclick="togglePasswordVisibility(${index})"></i>
+    </div>
+            <hr />
     <div class="data-buttons">
       <button class="btn btn-primary edit-button" data-index="${index}" data-id="${formData.id}" ">
         Edit
@@ -279,5 +299,9 @@ function displayFormData(formDataArray: FormDataAll[]) {
         })
         .catch((error) => console.error("Error:", error));
     });
+
+   
   });
 }
+
+
