@@ -27,9 +27,20 @@ export default class UserModel {
     // Find the user by email
     const user = await prisma.user.findUnique({ where: { email } });
 
-    // Throw an error if the user is not found or the password is incorrect
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-      throw new Error("Invalid credentials");
+    // // Throw an error if the user is not found or the password is incorrect
+    // if (!user || !(await bcrypt.compare(password, user.password))) {
+    //   throw new Error("Invalid credentials");
+    // }
+
+    // Check if the user exists
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    // Check if the provided password is incorrect
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      throw new Error("Invalid password");
     }
 
     // Generate JWT token

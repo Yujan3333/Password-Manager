@@ -37,13 +37,14 @@ addForm.addEventListener("submit", (event) => {
   const websiteInput = document.getElementById("website") as HTMLInputElement;
   const passwordInput = document.getElementById("password") as HTMLInputElement;
   const emailInput = document.getElementById("email") as HTMLInputElement;
-  const emailValue = emailInput.value;
 
-  // validating if the email is in the correct format or not
-  if (!isValidEmail(emailValue)) {
-    alert("Please enter a valid email address.");
-    return;
-  }
+
+  // const emailValue = emailInput.value;
+  // // validating if the email is in the correct format or not
+  // if (!isValidEmail(emailValue)) {
+  //   alert("Please enter a valid email address.");
+  //   return;
+  // }
 
   // // Save the form data in local storage
   // const storedData = JSON.parse(localStorage.getItem("formData") || "[]");
@@ -75,7 +76,7 @@ addForm.addEventListener("submit", (event) => {
     sitepassword: passwordInput.value,
   };
 
-  // Send data to the backend
+  // Send data to the backend************************************************
   fetch("http://127.0.0.1:8000/vaults", {
     method: "POST",
     headers: headers,
@@ -88,19 +89,21 @@ addForm.addEventListener("submit", (event) => {
     })
     .catch((error) => console.error("Error:", error));
 
+  addForm.reset();  //resets the form data
+  updatePasswordStrengthIndicator(); //update the strength checker div
   addForm.style.display = "none"; // Hide the form after successful submission
   mainBody.style.display = "block"; //Back to default
   mainData.style.display = "grid"; // Show main body when form is hidden
 });
 
-//Validating the email part *****************************************************
-function isValidEmail(email: string): boolean {
-  // Email Validation
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailPattern.test(email);
-}
+// //Validating the email part *****************************************************
+// function isValidEmail(email: string): boolean {
+//   // Email Validation
+//   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   return emailPattern.test(email);
+// }
 
-//Showing the fetched data in frontend "class: main-data"
+//Showing the fetched data in frontend "class: main-data"**********************************
 function fetchVaults() {
   // // Fetch vault data from the backend
   // fetch('http://127.0.0.1:8000/vaults')     //Here i am sending userId in the url
@@ -142,18 +145,19 @@ cancelFormButton.addEventListener("click", () => {
   // Reset the form elements to their default values
   addForm.reset();
 
-  // PASSWORD STRENGTH CHECK *********************************************
-  // To remove the div when the password input value is empty
-  const strengthIndicator = document.getElementById(
-    "passwordStrength"
-  ) as HTMLDivElement;
+  // // PASSWORD STRENGTH CHECK *********************************************
+  // // To remove the div when the password input value is empty
+  // const strengthIndicator = document.getElementById(
+  //   "passwordStrength"
+  // ) as HTMLDivElement;
 
-  // Check if the password length is zero
-  const passwordInput = document.getElementById("password") as HTMLInputElement;
-  if (passwordInput.value.length === 0) {
-    strengthIndicator.style.display = "none";
-    return; // Exit the function if the password length is zero
-  }
+  // // Check if the password length is zero
+  // const passwordInput = document.getElementById("password") as HTMLInputElement;
+  // if (passwordInput.value.length === 0) {
+  //   strengthIndicator.style.display = "none";
+  //   return; // Exit the function if the password length is zero
+  // }
+  // updatePasswordStrengthIndicator();
 });
 
 // function displayFormData(formDataArray: any[]) {
@@ -203,7 +207,7 @@ function displayFormData(formDataArray: FormDataAll[]) {
   mainData.innerHTML = ""; // Clear existing content
 
   console.log(
-    "Received for Get Req",
+    "Checking jwt token expired or not is not Array yes expired",
     formDataArray
   ); //MayNotBeReceived if jwt is expired
 

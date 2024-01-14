@@ -3,7 +3,7 @@ import config from "./config";
 // Secret key used for encryption and decryption
 // const secret = "pppppppppppppppppppppppppppppppp";
 const secret=config.secretKey;
-// console.log(secret);
+console.log(secret.length);
 
 // Function to encrypt a password
 const encrypt = (password: string): { iv: string; password: string } => {

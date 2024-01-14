@@ -12,6 +12,11 @@ const generatePassword = (length: number): string => {
 
   let password = "";
 
+  // // Ensure the combined character set is long enough
+  // if (allChars.length < length) {
+  //   throw new Error("Combined character set is not long enough for the desired password length.");
+  // }
+
   // Loop to randomly select characters from the combined character set
   for (let i = 0; i < length; i++) {
     // Generate a random index within the length of the combined character set
@@ -34,9 +39,10 @@ if (generatePasswordButton) {
 
     if (showGeneratedPassword) {
       showGeneratedPassword.style.display = "block";
-      showGeneratedPassword.innerHTML = `${generatedPassword}`;
+      // showGeneratedPassword.innerHTML = `${generatedPassword}`;
+      showGeneratedPassword.innerHTML = "Copied to Clipboard";
 
-       // Copy the generated password to the clipboard
+       // Copy the generated password to the clipboard By creating a temporary textarea
       const textarea = document.createElement("textarea");
       textarea.value = generatedPassword;
       document.body.appendChild(textarea);
@@ -51,7 +57,7 @@ if (generatePasswordButton) {
       setTimeout(() => {
         showGeneratedPassword.style.display = "none";
         // showGeneratedPassword.innerHTML = ""; // Clear the content
-      }, 4000);
+      }, 1000);
     }
   });
 }

@@ -7,7 +7,6 @@ interface Vault {
   website: string;
   email: string;
   sitepassword: string;
-  iv:string;
 }
 
 const prisma = new PrismaClient();

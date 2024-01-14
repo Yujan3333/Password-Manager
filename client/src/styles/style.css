@@ -371,6 +371,36 @@ main .main-data {
   color: green;
 }
 
+/* MESSAGES IN THE SIGNUP PAGE */
+#signupMessage, #loginMessage {
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.signup-message-success, .login-message-success {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+}
+
+.signup-message-error, .login-message-error {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}
+
+/* MESSAGES IN THE EDIT FORM */
+#editEmailError{
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+  transition: opacity 0.3s ease-in-out;
+  opacity: 1;
+}
+
 /* MEDIA QUERIES */
 @media (max-width: 750px) {
   /* HOMEPAGE */

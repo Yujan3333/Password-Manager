@@ -65,11 +65,9 @@ export default class VaultController {
 
      // Got the extracted JWT token
      const userId = decoded.userId;
-     console.log(`userId: ${userId}`);
 
       const vaultData = req.body;
       console.log(vaultData);
-      
       const vault = await VaultModel.addVault(userId, vaultData);
       res.status(201).json(vault);
     } catch (error) {

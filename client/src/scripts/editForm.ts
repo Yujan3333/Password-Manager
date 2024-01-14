@@ -7,6 +7,7 @@ const submitEditFormButton = document.getElementById(
 const cancelEditFormButton = document.getElementById(
   "cancelEditForm"
 ) as HTMLElement;
+const emailErrorDiv = document.getElementById("editEmailError") as HTMLDivElement;
 //For getting the vaultId to send in backend
 
 submitEditFormButton.addEventListener("click", () => {
@@ -23,12 +24,35 @@ submitEditFormButton.addEventListener("click", () => {
   const editEntryIdInput = document.getElementById(
     "editEntryId"
   ) as HTMLInputElement;
-  const editEmailValue = editEmailInput.value;
 
+  const editEmailValue = editEmailInput.value;
   // validating if the email is in the correct format or not
+  // if (!isValidEmail(editEmailValue)) {
+  //   alert("Please enter a valid email address.");
+  //   return;
+  // }
+
   if (!isValidEmail(editEmailValue)) {
-    alert("Please enter a valid email address.");
+    // Show error message in a div
+    emailErrorDiv.innerText = "Please enter a valid email address.";
+
+    // Add the 'hidden' class after 3 seconds
+    setTimeout(() => {
+      emailErrorDiv.innerText = "";
+    }, 3000);
+
     return;
+  } else {
+    // Clear the error message if email is valid
+    emailErrorDiv.innerText = "";
+  }
+
+
+  //Validating the email part *****************************************************
+  function isValidEmail(email: string): boolean {
+    // Email Validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
   }
 
   // Getting the token from local storage
@@ -67,17 +91,22 @@ submitEditFormButton.addEventListener("click", () => {
     })
     .catch((error) => console.error("Error:", error));
 
+  //To reset the form and strength indicator div after form submission
+  editForm.reset(); //resets the form data to empty
+  updatePasswordStrengthIndicatorEdit();  //Remove the strength Checker is null
   // Hide the edit form after successful submission
   editForm.style.display = "none";
   mainBody.style.display = "block"; // Back to default
   mainData.style.display = "grid"; // Show main body when form is hidden
 });
 
-// cancelEditFormButton.addEventListener("click", () => {
-//   editForm.style.display = "none"; // Hide the edit form on cancel
-//   mainBody.style.display = "block"; // Back to default
-//   mainData.style.display = "grid"; // Show main body when form is hidden
-// });
+cancelEditFormButton.addEventListener("click", () => {
+  editForm.style.display = "none"; // Hide the edit form on cancel
+  mainBody.style.display = "block"; // Back to default
+  mainData.style.display = "grid"; // Show main body when form is hidden
+  editForm.reset(); //resets the form data to empty
+  updatePasswordStrengthIndicatorEdit();  //Remove the strength Checker is null
+});
 
 // // Validating the email part
 // function isValidEmailEdit(email: string): boolean {
@@ -86,20 +115,16 @@ submitEditFormButton.addEventListener("click", () => {
 //   return emailPattern.test(email);
 // }
 
-// PASSWORD STRENGTH CHECK *********************************************
-// To remove the div when the edi form password input value is empty
-const strengthIndicator = document.getElementById(
-  "editPasswordStrength"
-) as HTMLDivElement;
+// // PASSWORD STRENGTH CHECK *********************************************
+// // To remove the div when the edi form password input value is empty
+// const strengthIndicator = document.getElementById(
+//   "editPasswordStrength"
+// ) as HTMLDivElement;
 
-// Check if the password length is zero
-const editPasswordInputStrengthChecker = document.getElementById(
-  "editPassword"
-) as HTMLInputElement;
-if (editPasswordInputStrengthChecker.value.length === 0) {
-  strengthIndicator.style.display = "none";
-}
-
-
-
-  
+// // Check if the password length is zero
+// const editPasswordInputStrengthChecker = document.getElementById(
+//   "editPassword"
+// ) as HTMLInputElement;
+// if (editPasswordInputStrengthChecker.value.length === 0) {
+//   strengthIndicator.style.display = "none";
+// }
