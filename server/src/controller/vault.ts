@@ -5,6 +5,8 @@ import jwt from "jsonwebtoken";
 import config from "../config";
 
 export default class VaultController {
+
+  // GET ALL THE VAULT DATA **********************************************
   static async getAllVaults(req: Request, res: Response) {
     try {
       // const userId = parseInt(req.params.userId, 10);
@@ -37,6 +39,9 @@ export default class VaultController {
     }
   }
 
+
+
+  // ADD VAULT DATA IN VAULT*******************************************
   static async addVault(req: Request, res: Response) {
     try {
       // const userId = parseInt(req.params.userId, 10);
@@ -60,9 +65,11 @@ export default class VaultController {
 
      // Got the extracted JWT token
      const userId = decoded.userId;
+     console.log(`userId: ${userId}`);
 
       const vaultData = req.body;
       console.log(vaultData);
+      
       const vault = await VaultModel.addVault(userId, vaultData);
       res.status(201).json(vault);
     } catch (error) {
@@ -72,6 +79,7 @@ export default class VaultController {
     }
   }
 
+  // UPDATE THE VAULT DATA **************************************************************
   static async updateVault(req: Request, res: Response) {
     try {
       const vaultId = parseInt(req.params.vaultId, 10);
@@ -86,6 +94,7 @@ export default class VaultController {
     }
   }
 
+  // DELETE THE VAULT DATA *******************************************************
   static async deleteVault(req: Request, res: Response) {
     try {
       const vaultId = parseInt(req.params.vaultId, 10);

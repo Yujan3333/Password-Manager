@@ -110,8 +110,14 @@ function fetchVaults() {
   //   })
   //   .catch(error => console.error('Error:', error));
 
-  //Sending the token to backend as well for userId verify
+  //Sending the token to backend as well for userId verify************************
   const token = localStorage.getItem("token");
+  // CHECK IF TOKEN EXPIRED ******************************************************
+  if(token){  //due to token possibly being null
+    if (isTokenExpired(token)) {
+      logout();
+    }
+  }
   const headers = new Headers({
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
@@ -197,7 +203,7 @@ function displayFormData(formDataArray: FormDataAll[]) {
   mainData.innerHTML = ""; // Clear existing content
 
   console.log(
-    "Checking jwt token expired or not is not Array yes expired",
+    "Received for Get Req",
     formDataArray
   ); //MayNotBeReceived if jwt is expired
 
