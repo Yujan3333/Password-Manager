@@ -17,7 +17,7 @@ body {
   white-space: nowrap; /* Prevent line breaks within the input */
 }
 
-/* Example of additional responsive styles */
+
 
 
 /* ADD and EDIT FORM */
@@ -81,7 +81,7 @@ body {
 
 
 
-/* Password View Section CSS */
+/* Password View Section in Add form and also used same in Edit Form CSS */
 .password-container {
   position: relative;
 }
@@ -103,10 +103,11 @@ body {
   cursor: pointer;
 } */
 
+
 /* Password section in main-data class */
 .password-container {
   position: relative;
-  width: 100%; /* Set a fixed width, adjust as needed */
+  width: 100%; 
 }
 
 .card-body input[type="password"]{
@@ -129,17 +130,19 @@ body {
   font-size: 16px; 
 }
 
+
 .toggle-password-icon-main {
   position: absolute;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
   cursor: pointer;
-  color: #333; /* Adjust icon color */
+  color: #333; 
 }
-
-
 /* Password View Section CSS END*/
+
+
+
 
 /* Password Strength Checker */
 .password-strength{
@@ -371,6 +374,29 @@ main .main-data {
   color: green;
 }
 
+/* Password View in Login Page */
+/* LOGIN PASSWORD EYE ICON */
+.password-login-input {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+#loginPassword {
+  width: 100%;
+  padding: 10px;
+}
+
+#toggleLoginPassword {
+  width: 0%;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  top: -11px;
+  left: 5px;
+}
+/* Password View in Login END */
+
 /* MESSAGES IN THE SIGNUP PAGE */
 #signupMessage, #loginMessage {
   padding: 10px;
@@ -400,6 +426,8 @@ main .main-data {
   transition: opacity 0.3s ease-in-out;
   opacity: 1;
 }
+
+
 
 /* MEDIA QUERIES */
 @media (max-width: 750px) {
