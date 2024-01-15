@@ -13,16 +13,6 @@ const prisma = new PrismaClient();
 
 export default class VaultModel {
   static async getAll(userId: number): Promise<Vault[]> {
-    // return prisma.vault.findMany({
-    //   where: { userId },
-    //   select: {
-    //     id: true,
-    //     website: true,
-    //     email: true,
-    //     sitepassword: true,
-    //     iv:true,
-    //   },
-    // });
     const encryptedVaults = await prisma.vault.findMany({
       where: { userId },
       select: {

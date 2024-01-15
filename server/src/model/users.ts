@@ -55,15 +55,4 @@ export default class UserModel {
 
     return token;
   }
-
-  // static async verifyToken(token: string): Promise<object> {
-  //   // Verify JWT token
-  //   //here config.myTokenKey is the secret key
-  //   try {
-  //     const decoded = jwt.verify(token, config.myTokenKey);
-  //     return decoded as object;
-  //   } catch (error) {
-  //     throw new Error("Invalid token");
-  //   }
-  // }
 }

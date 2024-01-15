@@ -46,9 +46,7 @@ export default class VaultController {
     try {
       // const userId = parseInt(req.params.userId, 10);
 
-
       // Extract user ID from the JWT token in the request header
-     // Extract user ID from the JWT token in the request header
      const token = req.headers.authorization?.split(' ')[1];
 
      // if no token is present
