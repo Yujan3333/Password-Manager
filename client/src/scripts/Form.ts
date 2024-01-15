@@ -89,8 +89,11 @@ addForm.addEventListener("submit", (event) => {
     })
     .catch((error) => console.error("Error:", error));
 
-  addForm.reset();  //resets the form data
-  updatePasswordStrengthIndicator(); //update the strength checker div
+
+  // Reset the form elements to their default values
+  addForm.reset();
+  updatePasswordStrengthIndicator();  //Update the strength checker
+  // Display Change
   addForm.style.display = "none"; // Hide the form after successful submission
   mainBody.style.display = "block"; //Back to default
   mainData.style.display = "grid"; // Show main body when form is hidden
@@ -144,6 +147,7 @@ cancelFormButton.addEventListener("click", () => {
   mainData.style.display = "grid"; // Show main body when form is hidden
   // Reset the form elements to their default values
   addForm.reset();
+  updatePasswordStrengthIndicator();
 
   // // PASSWORD STRENGTH CHECK *********************************************
   // // To remove the div when the password input value is empty
@@ -157,7 +161,6 @@ cancelFormButton.addEventListener("click", () => {
   //   strengthIndicator.style.display = "none";
   //   return; // Exit the function if the password length is zero
   // }
-  // updatePasswordStrengthIndicator();
 });
 
 // function displayFormData(formDataArray: any[]) {

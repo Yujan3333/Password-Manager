@@ -91,9 +91,9 @@ submitEditFormButton.addEventListener("click", () => {
     })
     .catch((error) => console.error("Error:", error));
 
-  //To reset the form and strength indicator div after form submission
-  editForm.reset(); //resets the form data to empty
-  updatePasswordStrengthIndicatorEdit();  //Remove the strength Checker is null
+  editForm.reset();//reset the form data to empty
+  updatePasswordStrengthIndicatorEdit();  //Remove the Strength checker after update btn is hit
+
   // Hide the edit form after successful submission
   editForm.style.display = "none";
   mainBody.style.display = "block"; // Back to default
@@ -104,8 +104,8 @@ cancelEditFormButton.addEventListener("click", () => {
   editForm.style.display = "none"; // Hide the edit form on cancel
   mainBody.style.display = "block"; // Back to default
   mainData.style.display = "grid"; // Show main body when form is hidden
-  editForm.reset(); //resets the form data to empty
-  updatePasswordStrengthIndicatorEdit();  //Remove the strength Checker is null
+  editForm.reset();//reset the form data to empty
+  updatePasswordStrengthIndicatorEdit();  //Remove the Strength checker after cancel is hit
 });
 
 // // Validating the email part
@@ -115,16 +115,16 @@ cancelEditFormButton.addEventListener("click", () => {
 //   return emailPattern.test(email);
 // }
 
-// // PASSWORD STRENGTH CHECK *********************************************
-// // To remove the div when the edi form password input value is empty
-// const strengthIndicator = document.getElementById(
-//   "editPasswordStrength"
-// ) as HTMLDivElement;
+// PASSWORD STRENGTH CHECK *********************************************
+// To remove the div when the edi form password input value is empty
+const strengthIndicator = document.getElementById(
+  "editPasswordStrength"
+) as HTMLDivElement;
 
-// // Check if the password length is zero
-// const editPasswordInputStrengthChecker = document.getElementById(
-//   "editPassword"
-// ) as HTMLInputElement;
-// if (editPasswordInputStrengthChecker.value.length === 0) {
-//   strengthIndicator.style.display = "none";
-// }
+// Check if the password length is zero
+const editPasswordInputStrengthChecker = document.getElementById(
+  "editPassword"
+) as HTMLInputElement;
+if (editPasswordInputStrengthChecker.value.length === 0) {
+  strengthIndicator.style.display = "none";
+}
