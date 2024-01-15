@@ -28,17 +28,6 @@ const generatePassword = (length: number): string => {
   
     let password = oneUppercase + oneLowercase + oneNumeric + oneSpecial;
 
-
-  // const allChars = uppercaseChars + lowercaseChars + numericChars + specialChars;
-
-  // let password = "";
-
-  
-  // // Ensure the combined character set is long enough
-  // if (allChars.length < length) {
-  //   throw new Error("Combined character set is not long enough for the desired password length.");
-  // }
-
   // Loop to randomly select characters from the combined character set
   for (let i = 0; i < remainingLength; i++) {
     // Generate a random index within the length of the combined character set

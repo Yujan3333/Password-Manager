@@ -1,5 +1,4 @@
 // src/scripts/strengthChecker.ts
-// Password strength 
 
 /**
  * 

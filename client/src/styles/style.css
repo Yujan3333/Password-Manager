@@ -53,8 +53,8 @@ body {
 }
 
 .add-form button,.edit-form button {
-  background-color: #22d422; /* Button background color */
-  color: #fff; /* Button text color */
+  background-color: #22d422; 
+  color: #fff; 
   padding: 10px 15px;
   border: none;
   border-radius: 3px;
@@ -62,22 +62,9 @@ body {
 }
 
 .add-form button:hover, .edit-form button:hover {
-  background-color: #15991b; /* Button background color on hover */
+  background-color: #15991b; 
 }
 /* Add form End */
-
-
-/* EDIT FORM */
-/* .edit-form{
-  display: none;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 10px;
-  width: 400px;
-  background-color: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-} */
 
 
 
@@ -93,15 +80,6 @@ body {
   transform: translateY(-50%);
   cursor: pointer;
 }
-
-/* .toggle-password-icon-main{
-  position: absolute;
-  top: 55%;
-  right: 60px;
-  right: 24px;
-  transform: translateY(-50%);
-  cursor: pointer;
-} */
 
 
 /* Password section in main-data class */
@@ -165,16 +143,6 @@ header h2 {
   cursor: pointer;
 }
 
-/* header a {
-  padding: 0.6rem 2rem;
-  background-color: #eeb806ad;
-  color: #000000;
-  border: none;
-  font-size: 1.1rem;
-  border-radius: 0.3rem;
-  cursor: pointer;
-  text-decoration: none;
-} */
 
 /* Logout Button */
 #logout {
@@ -208,23 +176,7 @@ main .main-data {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
-  /* margin-top: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center; */
 }
-
-/* main button {
-  font-size: 1rem;
-  padding: 1rem;
-  border-radius: 50%;
-  background-color: #5dd327;
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 0 0 2px rgba(23, 23, 23, 0.1);
-} */
-
 
 /* Generated Password Section  */
 .generated-password-section{
@@ -238,16 +190,16 @@ main .main-data {
   font-size: 1rem;
   padding: 1rem 1.5rem; 
   border-radius: 5px; 
-  background-color: #42db34; /* Use a different color */
+  background-color: #42db34; 
   color: #ffffff;
 }
 
 /* CSS for generate password button */
 .generate-password-btn {
   font-size: 1rem;
-  padding: 1rem 1.5rem; /* Increase padding for better appearance */
-  border-radius: 5px; /* Add some border-radius for rounded corners */
-  background-color: #3498db; /* Use a different color */
+  padding: 1rem 1.5rem; 
+  border-radius: 5px; 
+  background-color: #3498db; 
   color: #ffffff;
   border: none;
   cursor: pointer;
@@ -282,12 +234,6 @@ main .main-data {
   justify-content: center;
   align-items: center;
 }
-
-/* .signup-section{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
 
 .login-div,
 .signup-div {

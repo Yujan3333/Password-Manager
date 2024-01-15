@@ -46,12 +46,3 @@ function parseJwt(token:String) {
     return null; // Return null if unable to parse the token
   }
 }
-
-// // Check if the token is expired and logout if needed MAIN**********************
-// const token = localStorage.getItem("token");
-// if(token){  //due to token possibly being null
-//   if (isTokenExpired(token)) {
-//     logout();
-//   }
-// }
-

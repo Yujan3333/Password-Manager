@@ -26,12 +26,8 @@ submitEditFormButton.addEventListener("click", () => {
   ) as HTMLInputElement;
 
   const editEmailValue = editEmailInput.value;
-  // validating if the email is in the correct format or not
-  // if (!isValidEmail(editEmailValue)) {
-  //   alert("Please enter a valid email address.");
-  //   return;
-  // }
 
+  // validating if the email is in the correct format or not
   if (!isValidEmail(editEmailValue)) {
     // Show error message in a div
     emailErrorDiv.innerText = "Please enter a valid email address.";
@@ -48,7 +44,7 @@ submitEditFormButton.addEventListener("click", () => {
   }
 
 
-  //Validating the email part *****************************************************
+  //Validating the email Function *****************************************************
   function isValidEmail(email: string): boolean {
     // Email Validation
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -70,11 +66,9 @@ submitEditFormButton.addEventListener("click", () => {
     email: editEmailInput.value,
     sitepassword: editPasswordInput.value,
   };
-  //   console.log(updatedData);
+
 
   // Extracting the id of the edited entry related to backend  from the button's backend-id attribute
-  //   const editIndex = Number(entryDiv?.getAttribute("backend-id"));
-  // const editId = Number(submitEditFormButton.getAttribute("backend-id"));
   // Get the edited entry's ID from the hidden input
   const editId = editEntryIdInput.value;
   console.log("Index is", editId);
@@ -108,23 +102,17 @@ cancelEditFormButton.addEventListener("click", () => {
   updatePasswordStrengthIndicatorEdit();  //Remove the Strength checker after cancel is hit
 });
 
-// // Validating the email part
-// function isValidEmailEdit(email: string): boolean {
-//   // Email Validation
-//   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//   return emailPattern.test(email);
+
+// // PASSWORD STRENGTH CHECK *********************************************
+// // To remove the div when the edi form password input value is empty
+// const strengthIndicator = document.getElementById(
+//   "editPasswordStrength"
+// ) as HTMLDivElement;
+
+// // Check if the password length is zero
+// const editPasswordInputStrengthChecker = document.getElementById(
+//   "editPassword"
+// ) as HTMLInputElement;
+// if (editPasswordInputStrengthChecker.value.length === 0) {
+//   strengthIndicator.style.display = "none";
 // }
-
-// PASSWORD STRENGTH CHECK *********************************************
-// To remove the div when the edi form password input value is empty
-const strengthIndicator = document.getElementById(
-  "editPasswordStrength"
-) as HTMLDivElement;
-
-// Check if the password length is zero
-const editPasswordInputStrengthChecker = document.getElementById(
-  "editPassword"
-) as HTMLInputElement;
-if (editPasswordInputStrengthChecker.value.length === 0) {
-  strengthIndicator.style.display = "none";
-}

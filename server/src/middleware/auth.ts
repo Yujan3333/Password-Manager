@@ -15,7 +15,7 @@ export const auth = (req: any, res: Response, next: NextFunction) => {
     const decoded = jwt.verify(token, config.myTokenKey);
 
     req.user = decoded;
-    console.log(req.user);
+    // console.log(req.user);
     next();
   } catch (error) {
     // Handle errors here

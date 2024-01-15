@@ -1,7 +1,5 @@
-//scripts/addDataForm.ts
+//scripts/Form.ts
 
-// Import the handleDelete function from deleteForm.ts
-// import { handleDelete } from "./delteVault";
 
 const addButton = document.getElementById("addButton") as HTMLElement;
 const addForm = document.getElementById("addForm") as HTMLFormElement;
@@ -12,9 +10,7 @@ const mainBody = document.querySelector(".main-body") as HTMLElement;
 
 // Load existing data from local storage when the page loads
 document.addEventListener("DOMContentLoaded", () => {
-  // // FOR LOCAL STORAGE******
-  // const storedData = JSON.parse(localStorage.getItem("formData") || "[]");
-  // displayFormData(storedData);
+  //Sending a Get Request to backend
   fetchVaults();
 });
 
@@ -38,27 +34,6 @@ addForm.addEventListener("submit", (event) => {
   const passwordInput = document.getElementById("password") as HTMLInputElement;
   const emailInput = document.getElementById("email") as HTMLInputElement;
 
-
-  // const emailValue = emailInput.value;
-  // // validating if the email is in the correct format or not
-  // if (!isValidEmail(emailValue)) {
-  //   alert("Please enter a valid email address.");
-  //   return;
-  // }
-
-  // // Save the form data in local storage
-  // const storedData = JSON.parse(localStorage.getItem("formData") || "[]");
-  // const formData = {
-  //   website: websiteInput.value,
-  //   email: emailValue,
-  //   password: passwordInput.value,
-  // };
-
-  // storedData.push(formData);
-  // localStorage.setItem("formData", JSON.stringify(storedData));
-
-  // // Display the form data in the main-body
-  // displayFormData(storedData);
 
   //Getting the token in local storage
   const token = localStorage.getItem("token");
@@ -92,43 +67,34 @@ addForm.addEventListener("submit", (event) => {
 
   // Reset the form elements to their default values
   addForm.reset();
-  updatePasswordStrengthIndicator();  //Update the strength checker
+  updatePasswordStrengthIndicator();  //Update the strength checker to remove it
   // Display Change
   addForm.style.display = "none"; // Hide the form after successful submission
   mainBody.style.display = "block"; //Back to default
   mainData.style.display = "grid"; // Show main body when form is hidden
 });
 
-// //Validating the email part *****************************************************
-// function isValidEmail(email: string): boolean {
-//   // Email Validation
-//   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//   return emailPattern.test(email);
-// }
 
 //Showing the fetched data in frontend "class: main-data"**********************************
 function fetchVaults() {
-  // // Fetch vault data from the backend
-  // fetch('http://127.0.0.1:8000/vaults')     //Here i am sending userId in the url
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     displayFormData(data);
-  //   })
-  //   .catch(error => console.error('Error:', error));
 
-  //Sending the token to backend as well for userId verify************************
+  //Sending the token to backend as well for userId verify
   const token = localStorage.getItem("token");
+
   // CHECK IF TOKEN EXPIRED ******************************************************
   if(token){  //due to token possibly being null
     if (isTokenExpired(token)) {
       logout();
     }
   }
+
+  // Put token in Header
   const headers = new Headers({
     "Content-Type": "application/json",
     Authorization: `Bearer ${token}`,
   });
 
+  //Get Data From Backend
   fetch("http://127.0.0.1:8000/vaults", {
     method: "GET",
     headers: headers,
@@ -147,36 +113,8 @@ cancelFormButton.addEventListener("click", () => {
   mainData.style.display = "grid"; // Show main body when form is hidden
   // Reset the form elements to their default values
   addForm.reset();
-  updatePasswordStrengthIndicator();
-
-  // // PASSWORD STRENGTH CHECK *********************************************
-  // // To remove the div when the password input value is empty
-  // const strengthIndicator = document.getElementById(
-  //   "passwordStrength"
-  // ) as HTMLDivElement;
-
-  // // Check if the password length is zero
-  // const passwordInput = document.getElementById("password") as HTMLInputElement;
-  // if (passwordInput.value.length === 0) {
-  //   strengthIndicator.style.display = "none";
-  //   return; // Exit the function if the password length is zero
-  // }
+  updatePasswordStrengthIndicator(); //if password field null doesnot show strength indicator in strengthChecker.ts
 });
-
-// function displayFormData(formDataArray: any[]) {
-//   mainData.innerHTML = ""; // Clear existing content
-
-//   formDataArray.forEach((formData) => {
-//     const entryDiv = document.createElement("div");
-//     entryDiv.innerHTML = `
-//       <p>Website: ${formData.website}</p>
-//       <p>Email: ${formData.email}</p>
-//       <p>Password: ${formData.password}</p>
-//       <hr />
-//     `;
-//     mainData.appendChild(entryDiv);
-//   });
-// }
 
  //Toggle the Eye Section for maindata class
  function togglePasswordVisibility(index:number) {
