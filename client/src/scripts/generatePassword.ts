@@ -8,17 +8,39 @@ const generatePassword = (length: number): string => {
   const numericChars = "0123456789";
   const specialChars = "!@#$%^&*()-_+=<>?";
 
-  const allChars = uppercaseChars + lowercaseChars + numericChars + specialChars;
 
-  let password = "";
+    // Ensure at least one character from each character set
+    const oneUppercase = uppercaseChars.charAt(Math.floor(Math.random() * uppercaseChars.length));
+    const oneLowercase = lowercaseChars.charAt(Math.floor(Math.random() * lowercaseChars.length));
+    const oneNumeric = numericChars.charAt(Math.floor(Math.random() * numericChars.length));
+    const oneSpecial = specialChars.charAt(Math.floor(Math.random() * specialChars.length));
+  
+    // Combine all character sets
+    const allChars = uppercaseChars + lowercaseChars + numericChars + specialChars;
+  
+    // Calculate the remaining length for random characters
+    const remainingLength = length - 4;
+  
+    // Check if the combined character set is long enough
+    if (allChars.length < remainingLength) {
+      throw new Error("Combined character set is not long enough for the desired password length.");
+    }
+  
+    let password = oneUppercase + oneLowercase + oneNumeric + oneSpecial;
 
+
+  // const allChars = uppercaseChars + lowercaseChars + numericChars + specialChars;
+
+  // let password = "";
+
+  
   // // Ensure the combined character set is long enough
   // if (allChars.length < length) {
   //   throw new Error("Combined character set is not long enough for the desired password length.");
   // }
 
   // Loop to randomly select characters from the combined character set
-  for (let i = 0; i < length; i++) {
+  for (let i = 0; i < remainingLength; i++) {
     // Generate a random index within the length of the combined character set
     const randomIndex = Math.floor(Math.random() * allChars.length);
 
