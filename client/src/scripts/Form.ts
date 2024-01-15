@@ -215,7 +215,7 @@ function displayFormData(formDataArray: FormDataAll[]) {
   ); //MayNotBeReceived if jwt is expired
 
   // Reverse the formDataArray to display latest update at first
-  formDataArray.reverse();
+  // formDataArray.reverse();
 
   // Generates the HTML element for data fetched from backend **********************
   formDataArray.forEach((formData, index) => {
@@ -243,6 +243,7 @@ function displayFormData(formDataArray: FormDataAll[]) {
 `;
 
     mainData.appendChild(entryDiv);
+      
 
     // Event listener for edit button in the main body
     // When edit button clicks loads the data in the editForm
@@ -315,6 +316,8 @@ function displayFormData(formDataArray: FormDataAll[]) {
 
    
   });
+
+
 }
 
 

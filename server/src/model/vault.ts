@@ -32,6 +32,7 @@ export default class VaultModel {
         sitepassword: true,
         iv: true,
       },
+      orderBy: { id: 'desc' },
     });
 
     // Decrypt the passwords before returning the result
