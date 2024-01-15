@@ -49,7 +49,7 @@ export default class UserModel {
       { userId: user.id, email: user.email },
       config.myTokenKey,
       {
-        expiresIn: "1h", // Token expires in 1 hour
+        expiresIn: "2m", // Token expires in 1 hour
       }
     );
 
