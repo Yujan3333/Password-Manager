@@ -20,7 +20,7 @@ export default class VaultModel {
         website: true,
         email: true,
         sitepassword: true,
-        iv: true,
+        // iv: true,
       },
       orderBy: { id: 'desc' },
     });
@@ -30,8 +30,8 @@ export default class VaultModel {
       id: vault.id,
       website: vault.website,
       email: vault.email,
-      sitepassword: decrypt({ iv: vault.iv, password: vault.sitepassword }),
-      iv: vault.iv,
+      sitepassword: decrypt(vault.sitepassword),
+      // iv: vault.iv,
     }));
 
     return decryptedVaults;
@@ -40,14 +40,15 @@ export default class VaultModel {
   static async addVault(userId: number, vaultData: any): Promise<Vault> {
     //encypting the password before saving it
     const encryptedPassword=encrypt(vaultData.sitepassword);
+    const iv="random";
     //returns a iv and password as a object.
     return prisma.vault.create({
       data: {
         website: vaultData.website,
         email: vaultData.email,
         // sitepassword: vaultData.sitepassword,
-        sitepassword: encryptedPassword.password,
-        iv:encryptedPassword.iv,
+        sitepassword: encryptedPassword,
+        iv:iv,
         userId: userId,
       },
     });
@@ -57,18 +58,83 @@ export default class VaultModel {
     //encypting the password before saving it
     const encryptedPassword=encrypt(updateData.sitepassword);
     //returns a iv and password as a object.
+    const iv="random";
     return prisma.vault.update({
       where: { id: vaultId },
       data: {
         website: updateData.website,
         email: updateData.email,
         // sitepassword: updateData.sitepassword,
-        sitepassword:encryptedPassword.password,
-        iv:encryptedPassword.iv,
+        sitepassword:encryptedPassword,
+        iv:iv,
         
       },
     });
   }
+
+
+/* Start */
+
+// export default class VaultModel {
+//   static async getAll(userId: number): Promise<Vault[]> {
+//     const encryptedVaults = await prisma.vault.findMany({
+//       where: { userId },
+//       select: {
+//         id: true,
+//         website: true,
+//         email: true,
+//         sitepassword: true,
+//         iv: true,
+//       },
+//       orderBy: { id: 'desc' },
+//     });
+
+//     // Decrypt the passwords before returning the result
+//     const decryptedVaults = encryptedVaults.map((vault) => ({
+//       id: vault.id,
+//       website: vault.website,
+//       email: vault.email,
+//       sitepassword: decrypt({ iv: vault.iv, password: vault.sitepassword }),
+//       iv: vault.iv,
+//     }));
+
+//     return decryptedVaults;
+//   }
+
+//   static async addVault(userId: number, vaultData: any): Promise<Vault> {
+//     //encypting the password before saving it
+//     const encryptedPassword=encrypt(vaultData.sitepassword);
+//     //returns a iv and password as a object.
+//     return prisma.vault.create({
+//       data: {
+//         website: vaultData.website,
+//         email: vaultData.email,
+//         // sitepassword: vaultData.sitepassword,
+//         sitepassword: encryptedPassword.password,
+//         iv:encryptedPassword.iv,
+//         userId: userId,
+//       },
+//     });
+//   }
+
+//   static async updateVault(vaultId: number, updateData: any): Promise<Vault> {
+//     //encypting the password before saving it
+//     const encryptedPassword=encrypt(updateData.sitepassword);
+//     //returns a iv and password as a object.
+//     return prisma.vault.update({
+//       where: { id: vaultId },
+//       data: {
+//         website: updateData.website,
+//         email: updateData.email,
+//         // sitepassword: updateData.sitepassword,
+//         sitepassword:encryptedPassword.password,
+//         iv:encryptedPassword.iv,
+        
+//       },
+//     });
+//   }
+
+/* END */
 
   static async deleteVault(vaultId: number) {
     return prisma.vault.delete({
